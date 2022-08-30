@@ -44,26 +44,26 @@ def main():
                 green=img[:,:,1]
                 red=img[:,:,2]
                 
-                b=np.average(blue)
-                g=np.average(green)
-                r=np.average(red)
+                bl=np.average(blue)
+                gr=np.average(green)
+                rd=np.average(red)
                 
                 print = sg.Print
-                print('Warna Biru : ', b)
-                print('Warna Hijau : ', g)
-                print('Warna Merah : ', r)
+                print('Warna Biru : ', bl)
+                print('Warna Hijau : ', gr)
+                print('Warna Merah : ', rd)
 
-                if b>g:
-                    if b>=r:
+                if bl>gr:
+                    if bl>=rd:
                         result=print('Warna Dominan: BLUE')
-                        print(b)
+                        print(bl)
                 else:
-                    if g>=r:
+                    if gr>=rd:
                         result=print('Warna Dominan: GREEN')
-                        print(g)
+                        print(gr)
                     else:
                         result=print('Warna Dominan: RED')
-                        print(r)
+                        print(rd)
                 
                 window["slider-r"].update(visible=True)
                 window["slider-g"].update(visible=True)
