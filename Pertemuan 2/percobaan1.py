@@ -1,3 +1,4 @@
+from tokenize import Triple
 import PySimpleGUI as sg
 import cv2 as cv
 import numpy as np
@@ -12,8 +13,8 @@ def main():
 
     layout = [
         [sg.Image(filename="", key="image")],
-        [sg.Button("Load", size=(10, 1)), sg.Button(
-            "Restore", key="restore-btn", size=(10, 1), visible=False)],
+        [sg.Button("Load", size=(10, 1)), 
+         sg.Button("Restore", key="restore-btn", size=(10, 1), visible=False)],
         [sg.Text("Red", key="text-r", visible=False), sg.Slider(range=(0, 10), default_value=0,
                                                                 visible=False, orientation="h", key="slider-r", enable_events=True)],
         [sg.Text("Green", key="text-g", visible=False), sg.Slider(range=(0, 10), default_value=0,
@@ -37,7 +38,33 @@ def main():
 
             if filename != None and filename != "":
                 curr_slider_value = [0, 0, 0]
+                img = cv.imread(filename, cv.IMREAD_COLOR)
+                
+                blue=img[:,:,0]
+                green=img[:,:,1]
+                red=img[:,:,2]
+                
+                b=np.average(blue)
+                g=np.average(green)
+                r=np.average(red)
+                
+                print = sg.Print
+                print('Warna Biru : ', b)
+                print('Warna Hijau : ', g)
+                print('Warna Merah : ', r)
 
+                if b>g:
+                    if b>=r:
+                        result=print('Warna Dominan: BLUE')
+                        print(b)
+                else:
+                    if g>=r:
+                        result=print('Warna Dominan: GREEN')
+                        print(g)
+                    else:
+                        result=print('Warna Dominan: RED')
+                        print(r)
+                
                 window["slider-r"].update(visible=True)
                 window["slider-g"].update(visible=True)
                 window["slider-b"].update(visible=True)
@@ -47,8 +74,6 @@ def main():
                 window["text-b"].update(visible=True)
 
                 window["restore-btn"].update(visible=True)
-
-                img = cv.imread(filename, cv.IMREAD_COLOR)
 
                 image_element.update(data=encode_img(img))
 
@@ -66,7 +91,6 @@ def main():
 
             if not img is None:
                 temp_img = np.copy(img)
-
                 temp_img[:, :, 2] += curr_slider_value[2]
                 temp_img[:, :, 1] += curr_slider_value[1]
                 temp_img[:, :, 0] += curr_slider_value[0]
@@ -77,6 +101,5 @@ def main():
             break
 
     window.close()
-
-
+    
 main()
