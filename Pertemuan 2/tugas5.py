@@ -16,8 +16,8 @@ UI_STRING_FORMAT = "Image Preview are 500x500, image are {0}x{1}"
 menu_def = [
     ['&File', ['&Open', '---', 'Exit']],
     ['&Edit', ['Brightness',
-               'Inverse (Negative)', 'Restore', 'Histogram Equalization', 'Downsample by 1.25', 'Upsample by 1.25', 'Low Pass Filter (Average)', 'High Pass Filter (Edge Detection)', 'Band Pass Filter (Sharpening)']],
-    ['&View', ['Original Image']]
+               'Inverse (Negative)', 'Restore', 'Histogram Equalization', 'Downsample by 1.25', 'Upsample by 1.25', 'Quantize', 'Low Pass Filter (Average)', 'High Pass Filter (Edge Detection)', 'Band Pass Filter (Sharpening)']],
+    ['&View', ['Original Image', 'Histogram']]
 ]
 
 layout = [
